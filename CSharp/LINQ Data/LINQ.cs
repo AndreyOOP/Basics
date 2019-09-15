@@ -135,28 +135,6 @@ namespace CSharp
         }
 
         [Test]
-        public void tryfinally()
-        {
-            try
-            {
-                //return;
-                throw new ArgumentException();
-
-            }catch(ArgumentException ex)
-            {
-                throw new Exception();
-            }
-            catch (Exception ex)
-            {
-
-            }
-            //finally
-            //{
-            //    Console.WriteLine("Finally");
-            //}
-        }
-
-        [Test]
         public void Reverse()
         {
             var reversed = _data.Names.Reverse();
