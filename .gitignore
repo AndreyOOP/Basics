@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/CSharp/v15
+/CSharp/bin/Debug
+/CSharp/obj/Debug
+/packages/NUnit3TestAdapter.3.15.1
+/packages/NUnit.3.12.0
