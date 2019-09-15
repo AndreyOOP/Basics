@@ -43,7 +43,7 @@ namespace CSharp
     }
 
     [TestFixture]
-    public class Tst
+    public class OutputExtensionsTests
     {
         [Test]
         public void ToLine_OnCall_PrintObjectsArrayInSingleLine()

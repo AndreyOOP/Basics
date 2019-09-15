@@ -28,9 +28,31 @@ namespace CSharp
         }
 
         [Test]
+        public void WhereQuerySyntax()
+        {
+            var startFrom_M = from name in _data.Names
+                              where name[0] == 'M'
+                              select name;
+
+            _data.Names.ToLine();
+            startFrom_M.ToLine();
+        }
+
+        [Test]
         public void WhereWithIndex()
         {
             var eachSecond = _data.Names.Where((name, index) => index % 2 == 0);
+
+            _data.Names.ToLine();
+            eachSecond.ToLine();
+        }
+
+        [Test]
+        public void WhereWithIndexQuerySyntax()
+        {
+            var eachSecond = from temp in _data.Names.Select((name, index) => new { name, index })
+                             where temp.index % 2 == 0
+                             select temp.name;
 
             _data.Names.ToLine();
             eachSecond.ToLine();
@@ -59,6 +81,16 @@ namespace CSharp
             var splitted = _data.FullNames.SelectMany(fullName => fullName.Split());
 
             _data.FullNames.ToLine();
+            splitted.ToLine();
+        }
+
+        [Test]
+        public void SelectManyQuery()
+        {
+            var splitted = from fullName in _data.FullNames
+                           from partName in fullName.Split()
+                           select partName;
+
             splitted.ToLine();
         }
 
@@ -126,6 +158,16 @@ namespace CSharp
         }
 
         [Test]
+        public void JoinQuerySyntax()
+        {
+            var joined = from names1 in _data.Names
+                         join names2 in _data.Names2 on names1 equals names2
+                         select new { names1, names2 };
+
+            joined.Print();
+        }
+
+        [Test]
         public void RevertString()
         {
             var s = "Hello";
@@ -139,6 +181,16 @@ namespace CSharp
         {
             var reversed = _data.Names.Reverse();
 
+            _data.Names.ToLine();
+            reversed.ToLine();
+        }
+
+        [Test]
+        public void ReverseAndQuerySyntax()
+        {
+            var reversed = from name in _data.Names.Reverse()
+                           select name;
+                
             _data.Names.ToLine();
             reversed.ToLine();
         }
