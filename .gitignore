@@ -7,3 +7,8 @@
 /CSharp/obj/Debug
 /packages/NUnit3TestAdapter.3.15.1
 /packages/NUnit.3.12.0
+/Autofac/bin/Debug
+/Autofac/obj/Debug
+/packages/Autofac.4.9.4/lib
+/packages/Autofac.4.9.4/.signature.p7s
+/packages/Autofac.4.9.4/Autofac.4.9.4.nupkg
