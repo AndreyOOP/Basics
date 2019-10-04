@@ -57,11 +57,13 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AdvancedLog.cs" />
     <Compile Include="Services\Car.cs" />
     <Compile Include="Services\ConsoleLog.cs" />
     <Compile Include="Services\Engine.cs" />
     <Compile Include="Services\FileLog.cs" />
     <Compile Include="Services\ILogger.cs" />
+    <Compile Include="Services\IMessage.cs" />
     <Compile Include="Services\SimpleService.cs" />
     <Compile Include="AutofacBasics.cs" />
   </ItemGroup>

@@ -1,4 +1,5 @@
-﻿using Autofac.Services;
+﻿using Autofac.Core.Activators.Reflection;
+using Autofac.Services;
 using CSharp;
 using NUnit.Framework;
 using System;
@@ -111,6 +112,77 @@ namespace Autofac
             var car = container.Resolve<Car>();
 
             car.CheckCreatedCar();
+        }
+
+        [Test]
+        public void SampleOfUsage_FewRegistrations()
+        {
+            var builder = new ContainerBuilder();
+
+            builder.RegisterType<FileLog>().As<ILogger>();
+            builder.RegisterType<ConsoleLog>().As<ILogger>();
+
+            var container = builder.Build();
+
+            var logger = container.Resolve<ILogger>();
+
+            Assert.That(logger.GetType(), Is.Not.EqualTo(typeof(ILogger)));
+            Assert.That(logger.GetType(), Is.EqualTo(typeof(ConsoleLog)));
+        }
+
+        [Test]
+        public void MultipleInterfaces()
+        {
+            var builder = new ContainerBuilder();
+
+            builder.RegisterType<AdvancedLog>()
+                .As<ILogger>()
+                .As<IMessage>()
+                .AsSelf();
+
+            var container = builder.Build();
+
+            var logger1 = container.Resolve<ILogger>();
+            var logger2 = container.Resolve<IMessage>();
+            var logger3 = container.Resolve<AdvancedLog>();
+
+            Assert.True(logger1 != logger2);
+        }
+
+        [Test]
+        public void ChoosingBetweenFewConstructors()
+        {
+            var builder = new ContainerBuilder();
+
+            //builder.RegisterType<Car>(); //in this case resolved FileLog
+            builder.RegisterType<Car>()
+                .UsingConstructor(typeof(Engine));
+
+            builder.RegisterType<Engine>();
+            builder.RegisterType<FileLog>().As<ILogger>().SingleInstance();
+
+            var container = builder.Build();
+
+            var car = container.Resolve<Car>();
+
+            Assert.That(car.GetLogger(), Is.Null);
+        }
+
+        [Test]
+        public void InstanceRegistration()
+        {
+            var builder = new ContainerBuilder();
+
+            var fileLog = new FileLog();
+            builder.RegisterInstance(fileLog).As<ILogger>(); //now will be used instance of FileLog we register above
+
+            var container = builder.Build();
+
+            var resolvedFileLog = container.Resolve<ILogger>();
+            var resolvedFileLog2 = container.Resolve<ILogger>();
+
+            Assert.True(fileLog == resolvedFileLog);
+            Assert.True(fileLog == resolvedFileLog2);
         }
     }
 }
