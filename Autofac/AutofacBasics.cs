@@ -1,8 +1,6 @@
-﻿using Autofac.Core.Activators.Reflection;
-using Autofac.Services;
+﻿using Autofac.Services;
 using CSharp;
 using NUnit.Framework;
-using System;
 
 namespace Autofac
 {
@@ -10,7 +8,7 @@ namespace Autofac
     public class AutofacBasics
     {
         [Test]
-        public void SampleOfUsage_RegisterType()
+        public void RegisterType_ResolveConcreteType()
         {
             var builder = new ContainerBuilder();
 
@@ -23,7 +21,7 @@ namespace Autofac
         }
 
         [Test]
-        public void SampleOfUsage_RegisterInterface()
+        public void RegisterInterface_ResolveTypeByInterface()
         {
             var builder = new ContainerBuilder();
 
@@ -39,7 +37,7 @@ namespace Autofac
         }
 
         [Test]
-        public void SampleOfUsage_RegisterTypeAndInterface()
+        public void RegisterTypeAndInterface_ResolveServiceFromTypeAndInterface()
         {
             var builder = new ContainerBuilder();
 
@@ -56,7 +54,7 @@ namespace Autofac
         }
 
         [Test]
-        public void SampleOfUsage_FewTypeResolves_OnEachResolveDifferentObject()
+        public void ResolveSameServiceFewTimes_OnEachResolveDifferentInstance()
         {
             var builder = new ContainerBuilder();
 
@@ -74,7 +72,7 @@ namespace Autofac
         }
 
         [Test]
-        public void SampleOfUsage_SingleInstance()
+        public void RegisterSingleInstance_OnEachResolveSameInstance()
         {
             var builder = new ContainerBuilder();
 
@@ -88,11 +86,12 @@ namespace Autofac
             logger1.Log("Hello from Logger 1");
             logger2.Log("Hello from Logger 2");
 
+            Assert.True(logger1 == logger2);
             Assert.That(logger1.UniqueId, Is.EqualTo(logger2.UniqueId));
         }
 
         [Test]
-        public void SampleOfUsage_CarRegistration()
+        public void CarRegistration_SuccessfullyRegistered()
         {
             var builder = new ContainerBuilder();
 
@@ -115,7 +114,7 @@ namespace Autofac
         }
 
         [Test]
-        public void SampleOfUsage_FewRegistrations()
+        public void FewRegistrationsUnderSameInterface_LastOneResolved()
         {
             var builder = new ContainerBuilder();
 
@@ -131,7 +130,7 @@ namespace Autofac
         }
 
         [Test]
-        public void MultipleInterfaces()
+        public void TypeRegisteredUnderMultipleInterfaces_ResolvedByAnyOfInterface()
         {
             var builder = new ContainerBuilder();
 
@@ -150,7 +149,7 @@ namespace Autofac
         }
 
         [Test]
-        public void ChoosingBetweenFewConstructors()
+        public void ChoosingBetweenFewConstructors_SelectedBasedOnUsingConstructorParameters()
         {
             var builder = new ContainerBuilder();
 
@@ -169,7 +168,7 @@ namespace Autofac
         }
 
         [Test]
-        public void InstanceRegistration()
+        public void InstanceRegistration_SameInstanceResolved()
         {
             var builder = new ContainerBuilder();
 
