@@ -12,3 +12,11 @@
 /packages/Autofac.4.9.4/lib
 /packages/Autofac.4.9.4/.signature.p7s
 /packages/Autofac.4.9.4/Autofac.4.9.4.nupkg
+/packages/Microsoft.CrmSdk.CoreAssemblies.9.0.2.9/lib/net462
+/packages/Microsoft.CrmSdk.CoreAssemblies.9.0.2.9
+/packages/Microsoft.CrmSdk.Deployment.9.0.2.9/lib/net462
+/packages/Microsoft.CrmSdk.Workflow.9.0.2.9/lib/net462
+/packages/Microsoft.CrmSdk.XrmTooling.CoreAssembly.9.1.0.21/lib/net462
+/packages/Microsoft.IdentityModel.Clients.ActiveDirectory.3.19.8/lib
+/packages/Newtonsoft.Json.6.0.8/lib
+/packages
