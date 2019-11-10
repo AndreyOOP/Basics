@@ -1,14 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace CSharp.Exceptions.StackTrace
 {
-    // into each catch block ex is the same object => e1 == e2 == e3
-    public class MethodsThrowEx
+    // stack trace suppressed, each exception is different
+    public class SetInnerException
     {
-        public object e1;
-        public object e2;
-        public object e3;
-
         public void Method_1()
         {
             try
@@ -17,9 +17,7 @@ namespace CSharp.Exceptions.StackTrace
             }
             catch (Exception ex)
             {
-                //e3 = ex;
-                "Catch block of Method_1".Out();
-                throw ex;
+                throw new Exception("In method 1", ex);
             }
         }
 
@@ -31,9 +29,7 @@ namespace CSharp.Exceptions.StackTrace
             }
             catch (Exception ex)
             {
-                //e2 = ex;
-                "Catch block of Method_2".Out();
-                throw ex;
+                throw new Exception("In method 2", ex);
             }
         }
 
@@ -45,9 +41,7 @@ namespace CSharp.Exceptions.StackTrace
             }
             catch (Exception ex)
             {
-                //e1 = ex;
-                "Catch block of Method_3".Out();
-                throw ex;
+                throw new Exception("In method 3", ex);
             }
         }
     }

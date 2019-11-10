@@ -116,7 +116,8 @@ namespace CSharp.Exceptions
         {
             try
             {
-                throw new CustomException();
+                BaseException ex = new CustomException();
+                throw ex;
             }
             catch(CustomException ex)
             {
@@ -276,6 +277,19 @@ namespace CSharp.Exceptions
             }
         }
 
-        
+        [Test]
+        public void StackTrace_RethrowWithInnerException_InnerExceptionExistStackTraceSuppressed()
+        {
+            var innerExceptions = new SetInnerException();
+
+            try
+            {
+                innerExceptions.Method_1();
+            }
+            catch (Exception e)
+            {
+                e.StackTrace.Out();
+            }
+        }
     }
 }
