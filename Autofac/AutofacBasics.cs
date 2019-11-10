@@ -1,6 +1,8 @@
 ﻿using Autofac.Services;
+using Autofac.Services.Loggers;
 using CSharp;
 using NUnit.Framework;
+using System.Collections.Generic;
 
 namespace Autofac
 {
@@ -182,6 +184,73 @@ namespace Autofac
 
             Assert.True(fileLog == resolvedFileLog);
             Assert.True(fileLog == resolvedFileLog2);
+        }
+
+        [Test]
+        public void RegisterViaComponentContext_RegisteredUsingCorrectConstructor()
+        {
+            var builder = new ContainerBuilder();
+
+            builder.Register((IComponentContext componentContext) => new Car(componentContext.Resolve<Engine>()));
+            builder.RegisterType<Engine>().AsSelf();
+            builder.RegisterType<ConsoleLog>().As<ILogger>();
+
+            var container = builder.Build();
+
+            var car = container.Resolve<Car>();
+
+            Assert.IsNull(car.GetLogger());
+        }
+
+        [Test]
+        public void GenericRegistration_GenericTypeResolved()
+        {
+            var builder = new ContainerBuilder();
+
+            builder.RegisterGeneric(typeof(List<>)).As(typeof(IList<>));
+
+            var container = builder.Build();
+
+            var intList = container.Resolve<IList<int>>();
+            var stringList = container.Resolve<IList<string>>();
+
+            Assert.That(intList.GetType(), Is.EqualTo(typeof(List<int>)));
+            Assert.That(stringList.GetType(), Is.EqualTo(typeof(List<string>)));
+        }
+
+        [Test]
+        public void GetLogOfRegistrationProcess_DisplaySequenceOfComponentsActivationInConsole()
+        {
+            var builder = new ContainerBuilder();
+
+            builder.RegisterType<Car>();
+            builder.RegisterType<Engine>();
+            builder.RegisterType<FileLog>().As<ILogger>();
+            builder.RegisterModule<AutofacLogModule>();
+
+            var container = builder.Build();
+
+            var car = container.Resolve<Car>();
+        }
+
+        [Test]
+        public void RegistrationWithParameter_()
+        {
+            var builder = new ContainerBuilder();
+
+            //builder.RegisterType<SmsLog>()
+            //    .As<ILogger>()
+            //    .WithParameter("phoneNumber", "+123");
+
+            builder.RegisterType<SmsLog>()
+                .As<ILogger>()
+                .WithParameter(new TypedParameter(typeof(string), "+456"));
+
+            var container = builder.Build();
+
+            var logger = container.Resolve<ILogger>();
+
+            logger.Log("Test message");
         }
     }
 }

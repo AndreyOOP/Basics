@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutofacLogModule.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Loggers\AdvancedLog.cs" />
@@ -65,9 +66,12 @@
     <Compile Include="Services\Loggers\ILogger.cs" />
     <Compile Include="Services\Loggers\IMessage.cs" />
     <Compile Include="AutofacBasics.cs" />
+    <Compile Include="Services\Loggers\SmsLog.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
