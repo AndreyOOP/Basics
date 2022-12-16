@@ -20,3 +20,5 @@
 /packages/Microsoft.IdentityModel.Clients.ActiveDirectory.3.19.8/lib
 /packages/Newtonsoft.Json.6.0.8/lib
 /packages
+/C Sharp Samples/.vs
+/.vs/CSharp
