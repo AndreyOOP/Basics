@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace C_Sharp_Samples
+namespace C_Sharp_Samples.Sample1
 {
     [TestClass]
     public class PropertySamples
@@ -18,7 +18,7 @@ namespace C_Sharp_Samples
         public int A { get; init; }
         public int B { get; private set; }
 
-        public Properties() {}
+        public Properties() { }
 
         public Properties(int a, int b)
         {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace SyntaxSamples
+namespace C_Sharp_Samples.Sample1
 {
     // See samples:
     //   https://habr.com/ru/post/523552/
@@ -18,7 +18,7 @@ namespace SyntaxSamples
             switch (i)
             {
                 case 0:
-                    result = "zero"; 
+                    result = "zero";
                     break;
                 case 1:
                     result = "one";
@@ -96,7 +96,7 @@ namespace SyntaxSamples
 
             var result = weater switch
             {
-                Weater w when w.Pressure/w.Temperature > 0 => "divide",
+                Weater w when w.Pressure / w.Temperature > 0 => "divide",
                 Weater w when w.Pressure + w.Temperature == 699 => "sum",
                 _ => "default"
             };
